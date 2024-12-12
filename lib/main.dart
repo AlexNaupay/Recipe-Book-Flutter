@@ -24,15 +24,25 @@ class RecipeBook extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Recipe Book",
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.teal,
-      ),
-      body: const HomeScreen()
+    return DefaultTabController(length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              "Recipe Book",
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.teal,
+            bottom: const TabBar(
+                indicatorColor: Colors.teal,
+                labelColor: Colors.white,
+                tabs: [
+                Tab(icon: Icon(Icons.home), text: 'Home')
+            ]),
+          ),
+          body: const TabBarView(children: [
+            HomeScreen()
+          ]) ,
+        )
     );
   }
 }
