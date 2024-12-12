@@ -24,7 +24,8 @@ class RecipeBook extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(length: 4,
+    return DefaultTabController(
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
             title: const Text(
@@ -35,14 +36,13 @@ class RecipeBook extends StatelessWidget {
             bottom: const TabBar(
                 indicatorColor: Colors.teal,
                 labelColor: Colors.white,
+                unselectedLabelColor: Colors.white54,
                 tabs: [
-                Tab(icon: Icon(Icons.home), text: 'Home')
-            ]),
+                  Tab(icon: Icon(Icons.home), text: 'Home'),
+                  Tab(icon: Icon(Icons.home), text: 'Home2'),
+                ]),
           ),
-          body: const TabBarView(children: [
-            HomeScreen()
-          ]) ,
-        )
-    );
+          body: const TabBarView(children: [HomeScreen(), HomeScreen()]),
+        ));
   }
 }
