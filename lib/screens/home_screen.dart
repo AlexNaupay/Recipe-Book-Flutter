@@ -18,11 +18,28 @@ class HomeScreen extends StatelessWidget {
             const RecipeCard()
           ],
         ),
-
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal,
+          child: const Icon(Icons.add, color: Colors.white,),
+          onPressed: (){
+            _showBottomSheet(context);
+          }
       ),
     );
   }
 
+}
+
+Future<void> _showBottomSheet(BuildContext context){
+  return showModalBottomSheet(context: context,
+      builder: (context2) => Container(
+        padding: const EdgeInsets.all(16),
+        height: 350,
+        width: MediaQuery.of(context).size.width,
+        child: const Text("Hello"),
+      )
+  );
 }
 
 class RecipeCard extends StatelessWidget {
