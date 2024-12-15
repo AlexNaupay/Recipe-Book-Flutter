@@ -45,9 +45,7 @@ class RecipeCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Container(
-
-                ),
+                child: Image.asset("assets/images/pizza_lasagna.webp", fit: BoxFit.cover),
               ),
             ),
             const SizedBox(width: 26),
