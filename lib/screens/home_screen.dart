@@ -32,13 +32,24 @@ class HomeScreen extends StatelessWidget {
 }
 
 Future<void> _showBottomSheet(BuildContext context){
-  return showModalBottomSheet(context: context,
-      builder: (context2) => Container(
-        padding: const EdgeInsets.all(16),
-        height: 350,
-        width: MediaQuery.of(context).size.width,
-        child: const RecipeForm(),
-      )
+  return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => GestureDetector(
+        behavior: HitTestBehavior.opaque,  // This ensures that the entire area of the GestureDetector receives tap events
+        onTap: () => FocusScope.of(context).unfocus(), // Dismiss keyboard when tapping outside
+        child: Padding(  // Adds padding at the bottom equal to the keyboard height
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,  // gets the current keyboard height
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            height: 350,
+            width: MediaQuery.of(context).size.width,
+            child: const RecipeForm(),
+          ),
+        ),
+      ),
   );
 }
 
@@ -66,8 +77,6 @@ class RecipeForm extends StatelessWidget {
                 _buildTextField(label: "Ingredients"),
                 const SizedBox(height: 10),
                 _buildTextField(label: "Instructions"),
-
-
               ],
             ),
           )
