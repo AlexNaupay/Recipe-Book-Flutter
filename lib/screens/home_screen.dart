@@ -47,21 +47,51 @@ class RecipeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(8),
+    return Padding(
+      padding: const EdgeInsets.all(8),
       child: Form(
         //key: _formkey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Add a New Recipe", style: TextStyle(color: Colors.teal, fontSize: 24),)
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Add a New Recipe", style: TextStyle(color: Colors.teal, fontSize: 24)),
+                const SizedBox(height: 10),
+                _buildTextField(label: "Recipe Name"),
+                const SizedBox(height: 10),
+                _buildTextField(label: "Author"),
+                const SizedBox(height: 10),
+                _buildTextField(label: "Image URL"),
+                const SizedBox(height: 10),
+                _buildTextField(label: "Ingredients"),
+                const SizedBox(height: 10),
+                _buildTextField(label: "Instructions"),
+
+
+              ],
+            ),
           )
       ),
     );
   }
 
+  Widget _buildTextField({required String label}){
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: const TextStyle(fontFamily: 'Quicksand', color: Colors.teal),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide:const BorderSide(color: Colors.teal, width: 1)
+        ),
+      ),
+      focusNode: FocusNode(),
+    );
+  }
+
 }
+
 
 class RecipeCard extends StatelessWidget {
   const RecipeCard({
