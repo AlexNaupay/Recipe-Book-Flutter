@@ -37,9 +37,30 @@ Future<void> _showBottomSheet(BuildContext context){
         padding: const EdgeInsets.all(16),
         height: 350,
         width: MediaQuery.of(context).size.width,
-        child: const Text("Hello"),
+        child: const RecipeForm(),
       )
   );
+}
+
+class RecipeForm extends StatelessWidget {
+  const RecipeForm({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.all(8),
+      child: Form(
+        //key: _formkey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Add a New Recipe", style: TextStyle(color: Colors.teal, fontSize: 24),)
+            ],
+          )
+      ),
+    );
+  }
+
 }
 
 class RecipeCard extends StatelessWidget {
