@@ -58,25 +58,45 @@ class RecipeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+
+    TextEditingController nameController = TextEditingController();
+    TextEditingController authorController = TextEditingController();
+    TextEditingController urlController = TextEditingController();
+    TextEditingController ingredientsController = TextEditingController();
+    TextEditingController instructionsController = TextEditingController();
+
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Form(
-        //key: _formkey,
+        key: formKey,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text("Add a New Recipe", style: TextStyle(color: Colors.teal, fontSize: 24)),
                 const SizedBox(height: 10),
-                _buildTextField(label: "Recipe Name"),
+                _buildTextField(label: "Recipe Name", controller: nameController, validator: checkFieldEmpty),
+
                 const SizedBox(height: 10),
-                _buildTextField(label: "Author"),
+                _buildTextField(
+                    label: "Author",
+                    controller: authorController,
+                    validator: (value){ return emptyValidator(value, "Author es obligatorio"); }),
+
                 const SizedBox(height: 10),
-                _buildTextField(label: "Image URL"),
+                _buildTextField(label: "Image URL", controller: urlController, validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                }),
+
                 const SizedBox(height: 10),
-                _buildTextField(label: "Ingredients"),
+                _buildTextField(label: "Ingredients", controller: ingredientsController, validator: checkFieldEmpty),
+
                 const SizedBox(height: 10),
-                _buildTextField(label: "Instructions"),
+                _buildTextField(label: "Instructions", controller: instructionsController, validator: checkFieldEmpty),
               ],
             ),
           )
@@ -84,8 +104,29 @@ class RecipeForm extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField({required String label}){
+  String? emptyValidator(String? value, String message){
+      if (value == null || value.isEmpty){
+        return message;
+      }
+      return null;
+  }
+
+  String? checkFieldEmpty(String? value) { //<-- add String? as a return type
+    if(value == null || value.isEmpty) {
+      return 'Este campo es obligatorio';
+    }
+    return null;
+  }
+
+
+  Widget _buildTextField({
+    required String label,
+    required TextEditingController controller,
+    required String? Function(String?) validator,
+  }){
     return TextFormField(
+      //autovalidateMode: AutovalidateMode.always,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         labelText: label,
         labelStyle: const TextStyle(fontFamily: 'Quicksand', color: Colors.teal),
@@ -95,6 +136,8 @@ class RecipeForm extends StatelessWidget {
           borderSide:const BorderSide(color: Colors.teal, width: 1)
         ),
       ),
+      controller: controller,
+      validator: validator,
       focusNode: FocusNode(),
     );
   }
