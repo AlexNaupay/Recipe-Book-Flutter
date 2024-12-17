@@ -93,10 +93,28 @@ class RecipeForm extends StatelessWidget {
                 }),
 
                 const SizedBox(height: 10),
-                _buildTextField(label: "Ingredients", controller: ingredientsController, validator: checkFieldEmpty),
+                _buildTextField(label: "Ingredients", controller: ingredientsController, validator: checkFieldEmpty, maxLines: 3),
 
                 const SizedBox(height: 10),
-                _buildTextField(label: "Instructions", controller: instructionsController, validator: checkFieldEmpty),
+                _buildTextField(label: "Instructions", controller: instructionsController, validator: checkFieldEmpty, maxLines: 3),
+
+                const SizedBox(height: 20),
+                Center(
+                  child: ElevatedButton(
+                      onPressed: (){
+                        if(formKey.currentState!.validate()){
+                          Navigator.pop(context);
+                        }
+                      },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.only(top: 16, bottom: 16, left: 46, right: 46),
+                      backgroundColor: Colors.teal,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
+                    ),
+                    child: const Text("Save Recipe", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                  ),
+                )
+
               ],
             ),
           )
@@ -123,6 +141,7 @@ class RecipeForm extends StatelessWidget {
     required String label,
     required TextEditingController controller,
     required String? Function(String?) validator,
+    int maxLines = 1
   }){
     return TextFormField(
       //autovalidateMode: AutovalidateMode.always,
@@ -139,6 +158,7 @@ class RecipeForm extends StatelessWidget {
       controller: controller,
       validator: validator,
       focusNode: FocusNode(),
+      maxLines: maxLines,
     );
   }
 
