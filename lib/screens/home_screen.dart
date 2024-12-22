@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_book_flutter/screens/recipe_detail.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -172,34 +173,42 @@ class RecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container( width: MediaQuery.of(context).size.width, height: 125,
-      child: Card(
-        child: Row(
-          children: [
-            Container(
-              height: 125,
-              width: 100,
-              decoration: BoxDecoration(
-                color: Colors.teal,
-                borderRadius: BorderRadius.circular(10)
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const RecipeDetail(recipeName: "Lasagna",))
+        );
+      },
+      child: SizedBox( width: MediaQuery.of(context).size.width, height: 125,
+        child: Card(
+          child: Row(
+            children: [
+              Container(
+                height: 125,
+                width: 100,
+                decoration: BoxDecoration(
+                  color: Colors.teal,
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset("assets/images/pizza_lasagna.webp", fit: BoxFit.cover),
+                ),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset("assets/images/pizza_lasagna.webp", fit: BoxFit.cover),
-              ),
-            ),
-            const SizedBox(width: 26),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center, // vertical
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("Lasagna", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                Container(height: 2, width: 75, color: Colors.teal,),
-                const SizedBox(height: 4,),
-                const Text("Alison J"),
+              const SizedBox(width: 26),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center, // vertical
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Lasagna", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  Container(height: 2, width: 75, color: Colors.teal,),
+                  const SizedBox(height: 4,),
+                  const Text("Alison J"),
 
-            ],)
-          ],
+              ],)
+            ],
+          ),
         ),
       ),
     );
