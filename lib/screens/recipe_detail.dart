@@ -17,7 +17,7 @@ class RecipeDetail extends StatelessWidget {
             icon: const Icon(Icons.arrow_back, color: Colors.white,)
         ),
       ),
-      body: Text(recipeName),
+      body: Text('Recipe: $recipeName'),
     );
   }
 
