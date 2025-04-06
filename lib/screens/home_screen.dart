@@ -1,18 +1,20 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:recipe_book_flutter/screens/recipe_detail.dart';
+
+import '../models/recipe.dart';
+import '../providers/recipe_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    getRecipes();
+    final recipesProvider = Provider.of<RecipesProvider>(context, listen: false);
+    recipesProvider.getRecipes();  // Call the getRecipes method
 
     return Scaffold(
-      body: FutureBuilder(
+      /*body: FutureBuilder(
           future: getRecipes(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -30,7 +32,22 @@ class HomeScreen extends StatelessWidget {
                 return RecipeCard(recipe: recipes[index]);
               },
             );
-          }),
+          }),*/
+      body: Consumer<RecipesProvider>(
+        builder: (BuildContext context, provider, Widget? child) {
+          if (provider.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (provider.recipes.isEmpty) {
+            return const Center(child: Text('There are no recipes yet'));
+          } else {
+            return ListView.builder(
+              itemCount: provider.recipes.length,
+              itemBuilder: (context, index) {
+                return RecipeCard(recipe: provider.recipes[index]);
+              },
+            );
+          }
+        }),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.teal,
           child: const Icon(
@@ -42,17 +59,6 @@ class HomeScreen extends StatelessWidget {
           }),
     );
   }
-}
-
-Future<List<dynamic>> getRecipes() async {
-  // localhost
-  // Android: 10.0.2.2
-  // iOS: 127.0.0.1
-  final url = Uri.parse(
-      'https://raw.githubusercontent.com/AlexNaupay/Recipe-Book-Flutter/refs/heads/master/recipes.json');
-  final response = await http.get(url);
-  final jsonData = json.decode(response.body);
-  return jsonData['recipes'] as List;
 }
 
 Future<void> _showBottomSheet(BuildContext context) {
@@ -207,7 +213,7 @@ class RecipeForm extends StatelessWidget {
 }
 
 class RecipeCard extends StatelessWidget {
-  final dynamic recipe;
+  final Recipe recipe;
 
   const RecipeCard({
     super.key,
@@ -222,7 +228,7 @@ class RecipeCard extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => RecipeDetail(
-                      recipeName: recipe['name'],
+                      recipeName: recipe.name,
                     )));
       },
       child: SizedBox(
@@ -241,7 +247,7 @@ class RecipeCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   // child: Image.asset("assets/images/pizza_lasagna.webp", fit: BoxFit.cover),
                   child: Image.network(
-                    recipe['image_link'],
+                    recipe.imageLink,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       // return const Icon(Icons.error);
@@ -256,7 +262,7 @@ class RecipeCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    recipe['name'],
+                    recipe.name,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Container(
@@ -267,7 +273,7 @@ class RecipeCard extends StatelessWidget {
                   const SizedBox(
                     height: 4,
                   ),
-                  Text(recipe['author']),
+                  Text(recipe.author),
                 ],
               )
             ],
