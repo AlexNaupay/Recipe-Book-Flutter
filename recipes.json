@@ -1,6 +1,7 @@
 {
   "recipes": [
     {
+      "id": 1,
       "name": "Espaguetis a la Carbonara",
       "author": "Chef María López",
       "image_link": "https://static.platzi.com/media/uploads/Espagueti_2619917177.jpeg",
@@ -13,6 +14,7 @@
       ]
     },
     {
+      "id": 2,
       "name": "Ensalada César",
       "author": "Chef Juan Martínez",
       "image_link": "https://static.platzi.com/media/uploads/cesar_858569da19.jpeg",
@@ -25,6 +27,7 @@
       ]
     },
     {
+      "id": 3,
       "name": "Paella Valenciana",
       "author": "Chef Ana González",
       "image_link": "https://static.platzi.com/media/uploads/paella_4b9d56f036.jpeg",
@@ -37,6 +40,7 @@
       ]
     },
     {
+      "id": 4,
       "name": "Tacos al Pastor",
       "author": "Chef Luis Ramírez",
       "image_link": "https://static.platzi.com/media/uploads/tacos_6e6b075d0f.jpeg",
@@ -49,6 +53,7 @@
       ]
     },
     {
+      "id": 5,
       "name": "Sushi de Salmón",
       "author": "Chef Kazuo Tanaka",
       "image_link": "https://static.platzi.com/media/uploads/sushi_d2a9cca7f1.jpeg",
@@ -61,6 +66,7 @@
       ]
     },
     {
+      "id": 6,
       "name": "Curry de Pollo",
       "author": "Chef Priya Sharma",
       "image_link": "https://static.platzi.com/media/uploads/curry_a06bf8ce16.jpeg",
@@ -73,6 +79,7 @@
       ]
     },
     {
+      "id": 7,
       "name": "Pizza Margarita",
       "author": "Chef Marco Rossi",
       "image_link": "https://static.platzi.com/media/uploads/flutter_pizza_a9b42f3711.jpg",
@@ -85,6 +92,7 @@
       ]
     },
     {
+      "id": 8,
       "name": "Ramen Japonés",
       "author": "Chef Haruto Sato",
       "image_link": "https://static.platzi.com/media/uploads/ramen_711b4f6e26.jpeg",
@@ -97,6 +105,7 @@
       ]
     },
     {
+      "id": 9,
       "name": "Hamburguesa Clásica",
       "author": "Chef Tomás Pérez",
       "image_link": "https://example.com/images/hamburguesa_clasica.jpg",
@@ -109,6 +118,7 @@
       ]
     },
     {
+      "id": 10,
       "name": "Brownies de Chocolate",
       "author": "Chef Sofía Durán",
       "image_link": "https://static.platzi.com/media/uploads/Brownies_2ed8f0e619.jpeg",

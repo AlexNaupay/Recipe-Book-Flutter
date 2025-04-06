@@ -1,18 +1,21 @@
 class Recipe {
+  int id;
   final String name;
   final String author;
   final String imageLink;
   final List<String> instructions;
 
-  const Recipe({
-      required this.name,
-      required this.author,
-      required this.imageLink,
-      required this.instructions
+  Recipe({
+    this.id = 0,
+    required this.name,
+    required this.author,
+    required this.imageLink,
+    required this.instructions
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json){
     return Recipe(
+      id: json['id'],
       name: json['name'],
       author: json['author'],
       imageLink: json['image_link'],
@@ -22,6 +25,7 @@ class Recipe {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'name': name,
       'author': author,
       'image_link': imageLink,
@@ -31,7 +35,7 @@ class Recipe {
 
   @override
   String toString() {
-    return 'Recipe{name: $name, author: $author, imageLink: $imageLink, instructions: $instructions}';
+    return 'Recipe{id: $id, name: $name, author: $author, imageLink: $imageLink, instructions: $instructions}';
   }
 
 }
