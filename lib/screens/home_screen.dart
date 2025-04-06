@@ -15,6 +15,14 @@ class HomeScreen extends StatelessWidget {
       body: FutureBuilder(
           future: getRecipes(),
           builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data == null) {
+              return Center(child: Text('There is no recipes yet'));
+            }
+
             final recipes = snapshot.data as List;
             return ListView.builder(
               itemCount: recipes.length,
