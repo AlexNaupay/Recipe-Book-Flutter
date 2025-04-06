@@ -45,6 +45,9 @@ class HomeScreen extends StatelessWidget {
 }
 
 Future<List<dynamic>> getRecipes() async {
+  // localhost
+  // Android: 10.0.2.2
+  // iOS: 127.0.0.1
   final url = Uri.parse(
       'https://raw.githubusercontent.com/AlexNaupay/Recipe-Book-Flutter/refs/heads/master/recipes.json');
   final response = await http.get(url);
