@@ -19,8 +19,8 @@ class RecipeCard extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => RecipeDetail(
-                  recipeName: recipe.name,
-                )));
+                      recipe: recipe,
+                    )));
       },
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -31,9 +31,8 @@ class RecipeCard extends StatelessWidget {
               Container(
                 height: 125,
                 width: 100,
-                decoration: BoxDecoration(
-                    color: Colors.teal,
-                    borderRadius: BorderRadius.circular(10)),
+                decoration:
+                    BoxDecoration(color: Colors.teal, borderRadius: BorderRadius.circular(10)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   // child: Image.asset("assets/images/pizza_lasagna.webp", fit: BoxFit.cover),
