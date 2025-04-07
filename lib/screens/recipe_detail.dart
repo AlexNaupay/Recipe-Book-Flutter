@@ -68,6 +68,7 @@ class _RecipeDetailState extends State<RecipeDetail> with SingleTickerProviderSt
                       .toggleFavoriteStatus(recipe);
                   setState(() {
                     isFavorite = !isFavorite;
+                    animationController.forward();
                   });
                 },
                 icon: ScaleTransition(
