@@ -48,9 +48,10 @@ class _RecipeDetailState extends State<RecipeDetail> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
+    final Recipe recipe = widget.recipe;  // Access the recipe from the widget
     return Scaffold(
       appBar: AppBar(
-          title: Text(widget.recipe.name, style: TextStyle(color: Colors.white)),
+          title: Text(recipe.name, style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.teal,
           leading: IconButton(
               onPressed: () {
@@ -64,7 +65,7 @@ class _RecipeDetailState extends State<RecipeDetail> with SingleTickerProviderSt
             IconButton(
                 onPressed: () async {
                   await Provider.of<RecipesProvider>(context, listen: false)
-                      .toggleFavoriteStatus(widget.recipe);
+                      .toggleFavoriteStatus(recipe);
                   setState(() {
                     isFavorite = !isFavorite;
                   });
@@ -80,12 +81,12 @@ class _RecipeDetailState extends State<RecipeDetail> with SingleTickerProviderSt
         padding: EdgeInsets.all(12),
         child: Column(
           children: [
-            Image.network(widget.recipe.imageLink),
+            Image.network(recipe.imageLink),
             SizedBox(
               height: 8,
             ),
             Text(
-              widget.recipe.name,
+              recipe.name,
               style: TextStyle(
                 color: Colors.teal,
                 fontFamily: 'Quicksand',
@@ -96,7 +97,7 @@ class _RecipeDetailState extends State<RecipeDetail> with SingleTickerProviderSt
             SizedBox(
               height: 8,
             ),
-            Text(widget.recipe.author,
+            Text(recipe.author,
                 style: TextStyle(
                   fontFamily: 'Quicksand',
                   fontWeight: FontWeight.w700,
@@ -116,7 +117,7 @@ class _RecipeDetailState extends State<RecipeDetail> with SingleTickerProviderSt
                     fontSize: 14,
                   ),
                 ),
-                for (var step in widget.recipe.instructions) Text("- $step"),
+                for (var step in recipe.instructions) Text("- $step"),
               ],
             ),
           ],
