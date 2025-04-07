@@ -3,14 +3,36 @@ import 'package:provider/provider.dart';
 import 'package:recipe_book_flutter/screens/recipe_card.dart';
 import '../providers/recipe_provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final recipesProvider = Provider.of<RecipesProvider>(context, listen: false);
-    recipesProvider.getRecipes();  // Call the getRecipes method
+  State<StatefulWidget> createState() {
+    return _HomeScreenState();
+  }
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Do something after the widget is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<RecipesProvider>(context, listen: false).getRecipes();
+    });
+
+    /*
+    // Do something after the widget is built
+    Future.microtask(() {
+      if (!mounted) return;  // Check if the widget is still mounted
+      Provider.of<RecipesProvider>(context, listen: false).getRecipes();  // Call the getRecipes method
+    });*/
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       /*body: FutureBuilder(
           future: getRecipes(),
@@ -32,20 +54,20 @@ class HomeScreen extends StatelessWidget {
             );
           }),*/
       body: Consumer<RecipesProvider>(
-        builder: (BuildContext context, provider, Widget? child) {
-          if (provider.isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (provider.recipes.isEmpty) {
-            return const Center(child: Text('There are no recipes yet'));
-          } else {
-            return ListView.builder(
-              itemCount: provider.recipes.length,
-              itemBuilder: (context, index) {
-                return RecipeCard(recipe: provider.recipes[index]);
-              },
-            );
-          }
-        }),
+          builder: (BuildContext context, provider, Widget? child) {
+            if (provider.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (provider.recipes.isEmpty) {
+              return const Center(child: Text('There are no recipes yet'));
+            } else {
+              return ListView.builder(
+                itemCount: provider.recipes.length,
+                itemBuilder: (context, index) {
+                  return RecipeCard(recipe: provider.recipes[index]);
+                },
+              );
+            }
+          }),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.teal,
           child: const Icon(
@@ -57,6 +79,7 @@ class HomeScreen extends StatelessWidget {
           }),
     );
   }
+
 }
 
 Future<void> _showBottomSheet(BuildContext context) {
