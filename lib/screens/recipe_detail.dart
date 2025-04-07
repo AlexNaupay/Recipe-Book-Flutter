@@ -42,13 +42,13 @@ class _RecipeDetailState extends State<RecipeDetail> with SingleTickerProviderSt
 
   @override
   void dispose() {
-    animationController.dispose();
     super.dispose();
+    animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final Recipe recipe = widget.recipe;  // Access the recipe from the widget
+    final Recipe recipe = widget.recipe;  // Access the recipe from the widget; RecipeDetail is the widget
     return Scaffold(
       appBar: AppBar(
           title: Text(recipe.name, style: TextStyle(color: Colors.white)),
@@ -79,48 +79,53 @@ class _RecipeDetailState extends State<RecipeDetail> with SingleTickerProviderSt
           ]),
       body: Padding(
         padding: EdgeInsets.all(12),
-        child: Column(
-          children: [
-            Image.network(recipe.imageLink),
-            SizedBox(
-              height: 8,
-            ),
-            Text(
-              recipe.name,
-              style: TextStyle(
-                color: Colors.teal,
-                fontFamily: 'Quicksand',
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.network(recipe.imageLink),
+              SizedBox(
+                height: 8,
               ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Text(recipe.author,
+              Text(
+                recipe.name,
                 style: TextStyle(
+                  color: Colors.teal,
                   fontFamily: 'Quicksand',
                   fontWeight: FontWeight.w700,
-                  fontSize: 16,
-                )),
-            SizedBox(
-              height: 8,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Recipes steps:',
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(recipe.author,
                   style: TextStyle(
                     fontFamily: 'Quicksand',
                     fontWeight: FontWeight.w700,
-                    fontSize: 14,
+                    fontSize: 16,
+                  )),
+              SizedBox(
+                height: 8,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Recipes steps:',
+                    style: TextStyle(
+                      fontFamily: 'Quicksand',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
                   ),
-                ),
-                for (var step in recipe.instructions) Text("- $step"),
-              ],
-            ),
-          ],
+                  SizedBox(height: 12),
+                  for (var step in recipe.instructions)
+                    Row(children: [Icon(Icons.check, size: 16), SizedBox(width: 8), Flexible(child: Text(step))]),
+                ],
+              ),
+              SizedBox(height: 36,)
+            ],
+          ),
         ),
       ),
     );
