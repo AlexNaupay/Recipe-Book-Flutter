@@ -1,0 +1,7 @@
+{
+    "@@locale": "es",
+    "title": "Recetario",
+    "noRecipes": "No se encuentran recetas",
+    "homeMenu": "Inicio",
+    "favoritesMenu": "Favoritos"
+}
