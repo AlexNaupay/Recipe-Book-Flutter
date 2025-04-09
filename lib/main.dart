@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:recipe_book_flutter/providers/recipe_provider.dart';
 import 'package:recipe_book_flutter/screens/fav_screen.dart';
 import 'package:recipe_book_flutter/screens/home_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:recipe_book_flutter/generated/i18n/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,10 +21,14 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         localizationsDelegates: [
-          AppLocalizations.delegate,  // From generated code
+          AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('es'),
         ],
         debugShowCheckedModeBanner: false,
         // debugShowMaterialGrid: true,
