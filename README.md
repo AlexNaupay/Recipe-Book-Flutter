@@ -18,4 +18,6 @@ samples, guidance on mobile development, and a full API reference.
 ```bash
 # Gen code based on l10n.yaml in .dart_tool/flutter_gen 
 flutter gen-l10n 
+
+flutter build apk --release
 ```
